@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QualPack — Autocontrôles préemballés</title>
+
+  <style>
+    :root {
+      --navy:#071827;
+      --navy2:#0D1B2A;
+      --blue:#2E7DD1;
+      --blue2:#5EA8FF;
+      --text:#0E1B32;
+      --muted:#5D6B82;
+      --border:#DDE6F2;
+      --soft:#F4F8FD;
+      --warning:#F5A623;
+      --radius:22px;
+    }
+
+    * { box-sizing:border-box; }
+
+    body {
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      color:var(--text);
+      background:#fff;
+    }
+
+    header {
+      background:linear-gradient(135deg, #061421, #0B2036);
+      color:white;
+      padding:24px 5vw;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .brand {
+      display:flex;
+      align-items:center;
+      gap:14px;
+      font-weight:800;
+      font-size:28px;
+    }
+
+    .brand img {
+      width:48px;
+      height:48px;
+      border-radius:12px;
+    }
+
+    .brand small {
+      display:block;
+      font-size:13px;
+      color:#7DB7FF;
+      letter-spacing:.08em;
+    }
+
+    .tagline {
+      color:#7DB7FF;
+      font-weight:700;
+      font-size:16px;
+    }
+
+    .header-btn {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:11px 18px;
+      border-radius:12px;
+      background:#ffffff;
+      color:#0D1B2A;
+      text-decoration:none;
+      font-size:14px;
+      font-weight:800;
+      box-shadow:0 10px 24px rgba(0,0,0,.16);
+    }
+
+    .header-btn:hover {
+      background:#F1F7FF;
+    }
+
+    .hero {
+  display:grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap:36px;
+  padding:34px 5vw 30px;
+  align-items:center;
+  background:linear-gradient(180deg, #F7FAFE, #FFFFFF);
+}
+    .pill {
+      display:inline-block;
+      background:#DCEBFF;
+      color:#0E62C7;
+      padding:9px 15px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:800;
+      margin-bottom:22px;
+    }
+
+    h1 {
+      font-size:38px;
+      line-height:1.12;
+      margin:0 0 16px;
+      letter-spacing:-1px;
+    }
+
+    .hero p {
+      font-size:18px;
+      line-height:1.6;
+      color:#33445F;
+      margin:0;
+      max-width:620px;
+    }
+
+    .hero-img {
+      background:#0D1B2A;
+      padding:12px;
+      border-radius:24px;
+      box-shadow:0 24px 60px rgba(8, 30, 55, .28);
+      border:1px solid rgba(255,255,255,.12);
+      transform: perspective(1100px) rotateY(-7deg) rotateX(2deg);
+      transform-origin:center;
+    }
+
+    .hero-img img {
+      display:block;
+      width:100%;
+      border-radius:16px;
+    }
+
+    .hero-actions {
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      align-items:center;
+      margin-top:26px;
+    }
+
+    .btn.secondary {
+      background:#ffffff;
+      color:#0D1B2A;
+      border:1px solid var(--border);
+      box-shadow:0 10px 24px rgba(17,45,78,.10);
+    }
+
+    .btn.secondary:hover {
+      background: #F4F8FD;
+    }
+
+    .trust {
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:24px;
+      margin-top:34px;
+      border-top:1px solid var(--border);
+      padding-top:30px;
+    }
+
+    .trust-item {
+      text-align:center;
+      color:#213654;
+      font-weight:700;
+    }
+
+    .trust-item span {
+      display:block;
+      font-size:34px;
+      margin-bottom:8px;
+    }
+
+    .features {
+  padding:34px 5vw 24px;
+  text-align:center;
+}
+
+    .features h2 {
+      font-size:28px;
+      margin:0 0 34px;
+    }
+
+    .cards {
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:24px;
+    }
+
+    .cards.three {
+      grid-template-columns:repeat(3, 1fr);
+    }
+
+    .card {
+      background:white;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:22px 20px;
+      box-shadow:0 12px 32px rgba(17, 45, 78, .08);
+    }
+
+    .card-icon {
+      width:74px;
+      height:74px;
+      margin:0 auto 20px;
+      border-radius:50%;
+      background:#EAF3FF;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:34px;
+    }
+
+    .card h3 {
+      margin:0 0 12px;
+      font-size:18px;
+    }
+
+    .card p {
+      margin:0;
+      color:var(--muted);
+      line-height:1.55;
+      font-size:15px;
+    }
+
+    .notice {
+      margin:24px 5vw;
+      border:1px solid var(--warning);
+      background:#FFF9ED;
+      border-radius:18px;
+      padding:22px 26px;
+      display:flex;
+      gap:18px;
+      align-items:flex-start;
+    }
+
+    .notice.legal {
+      border-color:#DDE6F2;
+      background:#F6F8FB;
+    }
+
+    .notice-icon {
+      font-size:38px;
+      line-height:1;
+    }
+
+    .notice strong {
+      display:block;
+      color:#7A4300;
+      margin-bottom:8px;
+      font-size:16px;
+      text-transform:uppercase;
+    }
+
+    .notice.legal strong {
+      color:#33445F;
+    }
+
+    .notice p {
+      margin:0;
+      line-height:1.55;
+      font-size:16px;
+      font-weight:700;
+    }
+
+    .notice.legal p {
+      color:#33445F;
+      font-size:14px;
+      font-weight:600;
+    }
+
+    .cta {
+      text-align:center;
+      padding:0 5vw 34px;
+    }
+
+    .btn {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+      padding:18px 34px;
+      border-radius:12px;
+      background:linear-gradient(135deg, #246FE0, #2E7DD1);
+      color:white;
+      text-decoration:none;
+      font-size:20px;
+      font-weight:800;
+      box-shadow:0 14px 35px rgba(46,125,209,.28);
+    }
+
+    .secure {
+      margin-top:16px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    footer {
+      background:linear-gradient(135deg, #061421, #0B2036);
+      color:white;
+      padding:34px 5vw 22px;
+    }
+
+    .footer-grid {
+      display:grid;
+      grid-template-columns:1.4fr 1fr 1fr;
+      gap:32px;
+      border-bottom:1px solid rgba(255,255,255,.12);
+      padding-bottom:26px;
+    }
+
+    footer h3 {
+      margin:0 0 12px;
+      font-size:24px;
+    }
+
+    footer h4 {
+      margin:0 0 12px;
+      font-size:13px;
+      color:#7DB7FF;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    footer p, footer li {
+      color:#C8D6E8;
+      line-height:1.6;
+      font-size:14px;
+    }
+
+    footer ul {
+      list-style:none;
+      padding:0;
+      margin:0;
+    }
+
+    footer li::before {
+      content:"✓ ";
+      color:#7DB7FF;
+    }
+
+    .copyright {
+      text-align:center;
+      color:#C8D6E8;
+      padding-top:20px;
+      font-size:13px;
+    }
+
+    @media (max-width: 900px) {
+      header {
+        flex-direction:column;
+        align-items:flex-start;
+        gap:12px;
+      }
+
+      .hero {
+        grid-template-columns:1fr;
+        padding-top:38px;
+      }
+
+      h1 {
+        font-size:34px;
+      }
+
+      .cards {
+        grid-template-columns:1fr;
+      }
+
+      .trust {
+        grid-template-columns:1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns:1fr;
+      }
+
+      .tagline {
+        font-size:14px;
+      }
+
+      .header-btn {
+        width:100%;
+      }
+
+      .hero-img {
+        transform:none;
+      }
+
+      .cards.three {
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+  <div class="brand">
+    <img src="./icon-192.png" alt="Logo QualPack">
+    <div>
+      QualPack
+      <small>by CODEX EXPERTISE</small>
+    </div>
+  </div>
+
+  <a id="header-access-app" class="header-btn" href="app.html?site_id=codex_test">
+    Espace client
+  </a>
+</header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <div class="pill">AUTOCONTRÔLES PRÉEMBALLÉS</div>
+        <h1>Digitalisez vos autocontrôles de production.</h1>
+        <p>
+          L’assistant terrain pour le suivi des pesées, la traçabilité des contrôles
+          et les tests détecteurs de métaux. Conçu pour les PME agroalimentaires.
+        </p>
+
+        <div class="hero-actions">
+          <a id="discover-app" class="btn" href="app.html?site_id=codex_test">
+            Découvrir l’application
+          </a>
+          <a id="access-app-hero" class="btn secondary" href="app.html?site_id=codex_test">
+            Espace client
+          </a>
+        </div>
+
+        <div class="trust">
+          <div class="trust-item"><span>🛡️</span>Fiable<br><small>Contrôles sécurisés</small></div>
+          <div class="trust-item"><span>⏱️</span>Rapide<br><small>Saisie intuitive</small></div>
+          <div class="trust-item"><span>📊</span>Pilotage<br><small>Dashboard qualité</small></div>
+        </div>
+      </div>
+
+      <div class="hero-img">
+        <img src="./dashboard-pro.png" alt="Dashboard Pro QualPack">
+      </div>
+    </section>
+
+    <section class="features" id="fonctionnalites">
+      <h2>Trois leviers simples pour fiabiliser vos autocontrôles</h2>
+
+      <div class="cards three">
+        <div class="card">
+          <div class="card-icon">📊</div>
+          <h3>Calculs qualité simplifiés</h3>
+          <p>Visualisation des moyennes, des défauts TU1/TU2 et des tendances qualité sur la période analysée.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">📄</div>
+          <h3>Traçabilité documentaire</h3>
+          <p>Rapports PDF / Excel instantanés pour faciliter vos suivis qualité et vos audits internes ou externes.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">📱</div>
+          <h3>Utilisation atelier</h3>
+          <p>Saisie simplifiée, compatible tablettes et smartphones pour une utilisation terrain.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="notice legal">
+      <div class="notice-icon">⚠️</div>
+      <div>
+        <strong>Avertissement important</strong>
+        <p>
+          QualPack est une solution logicielle d’aide à l’autocontrôle et à la traçabilité interne des données de production.
+          L’application ne constitue pas un instrument de mesure, ne réalise pas de certification métrologique légale
+          et ne certifie pas automatiquement la conformité d’un lot.
+          La conformité finale des lots, le respect des exigences réglementaires applicables et l’utilisation
+          d’instruments de mesure légalement appropriés et vérifiés restent sous la responsabilité de l’industriel
+          et de son service qualité.
+        </p>
+      </div>
+    </section>
+
+    <section class="cta">
+      <a id="discover-app" class="btn secondary" href="#fonctionnalites">
+          Découvrir l’application
+      </a>
+      <div class="secure">🔒 Connexion sécurisée à votre espace qualité</div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <h3>QualPack</h3>
+        <p>
+          La solution terrain dédiée aux autocontrôles préemballés,
+          développée pour les professionnels de l’agroalimentaire.
+        </p>
+      </div>
+
+      <div>
+        <h4>Fonctionnalités</h4>
+        <ul>
+          <li>Contrôles poids</li>
+          <li>Tests détecteurs</li>
+          <li>Traçabilité complète</li>
+          <li>Rapports et analyses</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>CODEX EXPERTISE</h4>
+        <p>
+          Spécialiste en qualité agroalimentaire et conformité terrain.
+        </p>
+      </div>
+    </div>
+
+    <div class="copyright">
+      © 2026 CODEX EXPERTISE — Tous droits réservés.
+    </div>
+  </footer>
+
+  <script>
+  const params = new URLSearchParams(window.location.search);
+  const siteId = params.get('site_id');
+
+  const targetUrl = siteId
+    ? `app.html?site_id=${encodeURIComponent(siteId)}`
+    : 'app.html?site_id=codex_test';
+
+  ['access-app', 'header-access-app', 'access-app-hero'].forEach((id) => {
+    const btn = document.getElementById(id);
+    if (btn) btn.href = targetUrl;
+  });
+
+  const discoverBtn = document.getElementById('discover-app');
+  if (discoverBtn) discoverBtn.href = '#fonctionnalites';
+</script>
+</body>
+</html>
