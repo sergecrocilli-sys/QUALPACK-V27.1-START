@@ -404,8 +404,8 @@
     </div>
   </div>
 
-  <a id="header-access-app" class="header-btn" href="app.html?site_id=codex_test">
-    Espace client
+  <a id="header-access-app" class="header-btn" href="app.html">
+  Espace client
   </a>
 </header>
 
@@ -420,12 +420,12 @@
         </p>
 
         <div class="hero-actions">
-          <a id="discover-app" class="btn" href="app.html?site_id=codex_test">
-            Découvrir l’application
+          <a id="access-demo-hero" class="btn" href="app.html?site_id=qualpack_demo">
+            Mode démo terrain
           </a>
-          <a id="access-app-hero" class="btn secondary" href="app.html?site_id=codex_test">
+          <a id="access-app-hero" class="btn secondary" href="app.html">
             Espace client
-          </a>
+         </a>
         </div>
 
         <div class="trust">
@@ -521,20 +521,24 @@
   </footer>
 
   <script>
+  <script>
   const params = new URLSearchParams(window.location.search);
   const siteId = params.get('site_id');
 
-  const targetUrl = siteId
+  const appUrl = siteId
     ? `app.html?site_id=${encodeURIComponent(siteId)}`
-    : 'app.html?site_id=codex_test';
+    : 'app.html';
 
-  ['access-app', 'header-access-app', 'access-app-hero'].forEach((id) => {
-    const btn = document.getElementById(id);
-    if (btn) btn.href = targetUrl;
-  });
+  const demoUrl = 'app.html?site_id=qualpack_demo';
 
-  const discoverBtn = document.getElementById('discover-app');
-  if (discoverBtn) discoverBtn.href = '#fonctionnalites';
+  const headerBtn = document.getElementById('header-access-app');
+  if (headerBtn) headerBtn.href = appUrl;
+
+  const appBtn = document.getElementById('access-app-hero');
+  if (appBtn) appBtn.href = appUrl;
+
+  const demoBtn = document.getElementById('access-demo-hero');
+  if (demoBtn) demoBtn.href = demoUrl;
 </script>
 </body>
 </html>
