@@ -90,10 +90,10 @@ html, body {
    IOS / PWA SAFE AREA
    ================================================================ */
 @supports (padding-top: env(safe-area-inset-top)) {
-  body {
-    padding-top: env(safe-area-inset-top);
+  .app {
+    padding-top: calc(env(safe-area-inset-top) - 12px);
   }
-}    
+}
 
 /* ---- LAYOUT ---- */
 .app {
