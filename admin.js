@@ -1195,17 +1195,36 @@ function adminV27ApplyStartToOperationalLists() {
       if (!CATALOGUE[client]) CATALOGUE[client] = [];
       const exists = CATALOGUE[client].some(x => adminV27Norm(x.nom) === adminV27Norm(p.label || p.nom));
       if (!exists) {
-        CATALOGUE[client].push({
-          id: p.id || p.key || ('prod_start_' + adminV27Slug(p.label || p.nom || 'produit')),
-          nom: p.label || p.nom,
-          qn: p.qn || null,
-          tare_fixe_g: p.tare_fixe_g ?? null,
-          ligne_prod: p.ligne_prod || '',
-          detecteur: p.detecteur || '',
-          quantite_prevue_defaut: p.quantite_prevue_defaut ?? null,
-          actif: true,
-          source: 'start'
-        });
+        const qn = Number(p.qn || 0);
+let seuils = {
+  tu1: p.tu1 ?? null,
+  tu2: p.tu2 ?? null,
+  tne: p.tne ?? null
+};
+
+if ((!seuils.tu1 || !seuils.tu2 || !seuils.tne) && qn > 0 && typeof calcSeuils === 'function') {
+  const s = calcSeuils(qn);
+  seuils = {
+    tu1: s.tu1 ?? null,
+    tu2: s.tu2 ?? null,
+    tne: s.tne ?? null
+  };
+}
+
+CATALOGUE[client].push({
+  id: p.id || p.key || ('prod_start_' + adminV27Slug(p.label || p.nom || 'produit')),
+  nom: p.label || p.nom,
+  qn: p.qn || null,
+  tu1: seuils.tu1,
+  tu2: seuils.tu2,
+  tne: seuils.tne,
+  tare_fixe_g: p.tare_fixe_g ?? null,
+  ligne_prod: p.ligne_prod || '',
+  detecteur: p.detecteur || '',
+  quantite_prevue_defaut: p.quantite_prevue_defaut ?? null,
+  actif: true,
+  source: 'start'
+});
       }
     });
   } catch (e) {
