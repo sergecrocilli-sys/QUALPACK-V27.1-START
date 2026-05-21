@@ -1929,6 +1929,61 @@ html, body {
 }
 
 /* ================================================================
+   ADMIN START — ACTIONS & MODE DEMO
+   ================================================================ */
+
+.admin-start-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.admin-start-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.demo-reset-small {
+  border: 1px solid rgba(245, 158, 11, .35);
+  background: rgba(245, 158, 11, .10);
+  color: #FBBF24;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .03em;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.demo-reset-small:hover {
+  background: rgba(245, 158, 11, .18);
+  border-color: rgba(245, 158, 11, .55);
+}
+
+@media (max-width: 640px) {
+  .admin-start-header {
+    align-items: flex-start;
+  }
+
+  .admin-start-actions {
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    gap: 6px;
+  }
+
+  .demo-reset-small {
+    font-size: 10px;
+    padding: 5px 9px;
+  }
+}
+
+/* ================================================================
    ADMIN — PIN + ÉCRAN ADMINISTRATION
    ================================================================ */
 
