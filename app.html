@@ -4949,7 +4949,8 @@ function genExcelPesee() {
   const r = d.r;
   const wb = XLSXLib.utils.book_new();
 
-  const tareFixe = Number(d.tare_fixe_g ?? d.prod?.tare_fixe_g ?? 0) || 0;
+  const tareCatalogue = Number(d.tare_catalogue_g ?? d.prod?.tare_fixe_g ?? 0) || 0;
+  const tareUtilisee = Number(d.tare_fixe_g ?? tareCatalogue) || 0;
   const moyenneBrute = Array.isArray(r.vGross) && r.vGross.length
     ? r.vGross.reduce((a, b) => a + b, 0) / r.vGross.length
     : null;
@@ -4966,17 +4967,18 @@ function genExcelPesee() {
     ['Mode de calcul', 'Saisie poids brut / statut calculé sur poids net'],
     [],
     ['Qn', d.prod.qn],
-    ['Tare fixe', tareFixe],
+    ['Tare catalogue', Number(tareCatalogue.toFixed(2))],
+    ['Tare utilisée', Number(tareUtilisee.toFixed(2))],
     ['TNE', d.prod.tne],
     ['Seuil TU1', d.prod.tu1],
     ['Seuil TU2', d.prod.tu2],
     [],
-    ['N°', 'Poids brut (g)', 'Tare fixe (g)', 'Poids net calculé (g)', 'Statut net']
+    ['N°', 'Poids brut (g)', 'Tare catalogue (g)', 'Tare utilisée (g)', 'Poids net calculé (g)', 'Statut net']
   ];
 
   const vGross = Array.isArray(r.vGross) ? r.vGross : (Array.isArray(r.v) ? r.v : []);
-  const vNet = Array.isArray(r.vNet) ? r.vNet : vGross.map(v => Number(v) - tareFixe);
-
+  const vNet = Array.isArray(r.vNet) ? r.vNet : vGross.map(v => Number(v) - tareUtilisee);
+  
   vGross.forEach((gross, i) => {
     const net = Number(vNet[i]);
     let statut = 'OK';
@@ -4989,10 +4991,11 @@ function genExcelPesee() {
     controleData.push([
       cell(i + 1),
       cell(Number(Number(gross).toFixed(1))),
-      cell(Number(tareFixe.toFixed(2))),
+      cell(Number(tareCatalogue.toFixed(2))),
+      cell(Number(tareUtilisee.toFixed(2))),
       cell(Number(Number(net).toFixed(1))),
       cell(statut)
-    ]);
+     ]);
   });
 
   controleData.push([]);
@@ -5007,7 +5010,8 @@ function genExcelPesee() {
 
   const wsControle = XLSXLib.utils.aoa_to_sheet(controleData);
   wsControle['!cols'] = [
-    { wch: 14 }, { wch: 18 }, { wch: 14 }, { wch: 22 }, { wch: 14 }
+    { wch: 14 }, { wch: 18 }, { wch: 18 }, { wch: 18 }, { wch: 22 }, { wch: 14 }
+   ];
   ];
   XLSXLib.utils.book_append_sheet(wb, wsControle, 'Controle_Pesee');
 
