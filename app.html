@@ -6182,7 +6182,7 @@ async function ensurePdfBrandAssets() {
 
   try {
     const [logo, picto, appIcon] = await Promise.all([
-      loadImageAsDataURL(['./logo-codex.jpg']),
+      loadImageAsDataURL(['./logo-codex.png']),
       loadImageAsDataURL(['./picto-codex.jpg']),
       loadImageAsDataURL(['./icon-192.png', './icon-512.png'])
     ]);
